@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 
-app.set("port", 8080);
+app.set("port", 3000);
 app.use(bodyParser.json({ type: "application/json" }));
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -63,9 +63,11 @@ app.get('/search', (req, res) => {
     let searchTerm = req.query.q;
     console.log(`Search for ${searchTerm}`);
     
-    // TODO
-
-    res.json({});
+    for (let i = 0; i < campgrounds.length; i++){
+      if (campgrounds[i].name == searchTerm){
+        res.json({name: campgrounds[i].name, town: campgrounds[i].town, lengthLimit: campgrounds[i].lengthLimit, elevation: campgrounds[i].elevation, numberOfSites: campgrounds[i].numberOfSites, padType: campgrounds[i].padType});
+      }
+    }
 })
 
 
@@ -118,10 +120,16 @@ app.get('/search', (req, res) => {
 
 */
 app.get('/fit', (req, res) => {
+  let rvLength = req.query.length;
+  let camps = { campgrounds: [] };
 
-    // TO DO
-
-    res.json({campgrounds: results});
+    for (let i = 0; i < campgrounds.length; i++){
+      if (campgrounds[i].lengthLimit > rvLength){
+        let c = campgrounds[i];
+        camps.campgrounds.push({"campground": c.name, "location": c.town, "maxLength": c.lengthLimit});
+      }
+    }
+    res.json(camps);
 })
 
 
@@ -158,7 +166,22 @@ app.get('/fit', (req, res) => {
 }
 */
 
-  // TO DO
+  app.get('/elevation', (req, res) => {
+    let alt = req.query.altitude;
+    let dir = req.query.direction;
+    let camps = { campgrounds: [] };
+    
+    for (let i = 0; i < campgrounds.length; i++){
+      if (dir == "higher" && campgrounds[i].elevation > alt){
+        let c = campgrounds[i];
+        camps.campgrounds.push({"campground": c.name, "elevation": c.elevation, "town": c.town});
+      } else if (dir == "lower" && campgrounds[i].elevation < alt){
+        let c = campgrounds[i];
+        camps.campgrounds.push({"campground": c.name, "elevation": c.elevation, "town": c.town});
+      }
+    }
+    res.json(camps);
+  })
 
 
 
