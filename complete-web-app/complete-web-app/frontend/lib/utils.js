@@ -1,7 +1,7 @@
 require ("isomorphic-fetch");
 
 function getNutrition(foodDesc){
-	return fetch(`http://localhost:8080/api?q=${foodDesc}`).then(function(resp){
+	return fetch(`http://35.237.191.86/api?q=${foodDesc}`).then(function(resp){
 		return resp.json();
 	})
 }
