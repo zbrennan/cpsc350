@@ -1,0 +1,29 @@
+{
+  "name": "complete-web-app",
+  "version": "1.0.0",
+  "description": "Fourth rudiment, complete web app",
+  "main": "foodSearch.js",
+  "scripts": {
+    "start": "NODE_PORT=8080 node foodSearch.js",
+    "start-prod": "NODE_PORT=80 node foodSearch.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "isomorphic-fetch": "^3.0.0",
+    "pg": "^8.5.1"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbrennan/cpsc350.git"
+  },
+  "author": "Zach Brennan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zbrennan/cpsc350/issues"
+  },
+  "homepage": "https://github.com/zbrennan/cpsc350#readme"
+}
